@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/style.css">
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css">
+
+</head>
+
+<body>
+
+
+    <img src="./assets/images/person.png" class="person" id="personOutside" alt="person">
+
+    <div class="elevator">
+        <img src="./assets/images/person.png" class="person" id="personInside" alt="person">
+
+        <div id="elevatorStatus">
+            <span id="elevatorFloor">1</span>
+            <img id="down-arrow" src="./assets/images/down-arrow.png" alt="up-arrow">
+            <img id="up-arrow" src="./assets/images/up-arrow.png" alt="down-arrow">
+            <img id="calm" src="./assets/images/calm.png" alt="cals">
+        </div>
+
+        <div id="elevatorControl" data-btn="whytdan">
+            <button class="elevatorBtn" data-btn="1">
+                <a>
+                    <i>1</i>
+                </a>
+            </button>
+
+            <button class="elevatorBtn" data-btn="2">
+                <a>
+                    <i>2</i>
+                </a>
+            </button>
+
+            <button class="elevatorBtn" data-btn="3">
+                <a>
+                    <i>3</i>
+                </a>
+            </button>
+
+            <button class="elevatorBtn" data-btn="4">
+                <a>
+                    <i>4</i>
+                </a>
+            </button>
+
+            <button class="elevatorBtn" data-btn="5">
+                <a>
+                    <i>5</i>
+                </a>
+            </button>
+
+            <button class="elevatorBtn" data-btn="6">
+                <a>
+                    <i>6</i>
+                </a>
+            </button>
+
+            <button class="elevatorBtn" data-btn="7">
+                <a>
+                    <i>7</i>
+                </a>
+            </button>
+
+            <button class="elevatorBtn" data-btn="8">
+                <a>
+                    <i>8</i>
+                </a>
+            </button>
+
+            <button class="elevatorBtn" data-btn="9">
+                <a>
+                    <i>9</i>
+                </a>
+            </button>
+
+            <button class="elevatorBtn" data-btn="10">
+                <a>
+                    <i>10</i>
+                </a>
+            </button>
+
+            <button class="elevatorBtn" data-btn="11">
+                <a>
+                    <i>11</i>
+                </a>
+            </button>
+
+            <button class="elevatorBtn" data-btn="12">
+                <a>
+                    <i>12</i>
+                </a>
+            </button>
+
+            <button class="elevatorBtn" data-btn="13">
+                <a>
+                    <i>13</i>
+                </a>
+            </button>
+
+            <button class="elevatorBtn" data-btn="14">
+                <a>
+                    <i>14</i>
+                </a>
+            </button>
+
+            <button class="elevatorBtn" data-btn="15">
+                <a>
+                    <i>15</i>
+                </a>
+            </button>
+
+            <button class="elevatorBtn" data-btn="16">
+                <a>
+                    <i>16</i>
+                </a>
+            </button>
+
+            <button class="elevatorBtn" data-btn="UP">
+                <a>
+                    <i class="icon-arrow-up"></i>
+                </a>
+            </button>
+
+            <button class="elevatorBtn" data-btn="DOWN">
+                <a>
+                    <i class="icon-arrow-down"></i>
+                </a>
+            </button>
+        </div>
+
+        <img class="elevatorImg" id="openedElevator" src="./assets/images/open.jpeg" alt="elevator">
+        <img class="elevatorImg" id="closedElevator" src="./assets/images/closed.jpeg" alt="elevator">
+
+        <button class="elevatorBtn" id="elevatorOpenBtn">
+            <a>
+                <i class="icon-home"></i>
+            </a>
+        </button>
+    </div>
+    <script>
+        function elevatorUpStatus(){
+            $('#calm').css('display','none')
+            $('#down-arrow').css('display','none')
+            $('#up-arrow').css('display','block')
+        }
+        function elevatorDownStatus(){
+            $('#calm').css('display','none')
+            $('#down-arrow').css('display','block')
+            $('#up-arrow').css('display','none')
+        }
+        function elevatorCalmStatus(){
+            $('#calm').css('display','block')
+            $('#down-arrow').css('display','none')
+            $('#up-arrow').css('display','none')
+            $('#closedElevator').css('display','none')
+            $('#openedElevator').css('display','block')
+            $('#personInside').css('display','none')
+            $('#personOutside').css('display','block')
+    
+            $('#elevatorControl').css('z-index','1')
+        }
+
+
+
+        let elevator = {
+            floor: 1,
+            min: 1,
+            max: 16,
+            isOpen: true,
+            oneFloorUp: function () {
+                if (this.floor === this.max) {
+                    alert('can not go higher')
+                } else {
+                    this.floor++
+                }
+            },
+            oneFloorDown: function () {
+                if (this.floor === this.min) {
+                    alert('can not go below')
+                } else {
+                    this.floor--
+                }
+            },
+            toFloor: function (floor) {
+                if (floor > this.max || floor < this.min) {
+                    alert('there are floors from 1 to 16')
+                } else if (floor === this.floor) {
+                    alert('Lol XD')
+                } else {
+                //     while (this.floor !== floor) {
+                //         if (this.floor < floor) {
+                //             this.oneFloorUp()
+                //         } else {
+                //             this.oneFloorDown()
+                //         }
+                //     }
+                let delay = setInterval(()=>{
+                    $('#elevatorFloor').text(this.floor)   
+                    
+                    if(this.floor === floor){
+                        elevatorCalmStatus()
+                        clearInterval(delay);
+                        return
+                    }
+
+                    if(floor>this.floor){
+                        elevatorUpStatus()
+                        this.oneFloorUp();
+                    }else{
+                        elevatorDownStatus()
+                        this.oneFloorDown()
+                    }
+                },800)
+                }
+            }
+        }
+
+        function startUsingElevator() {
+            $('#openedElevator').css('display', 'none');
+            $('#closedElevator').css('display', 'block');
+            $('#elevatorControl').css('z-index', -1);
+        }
+        $('#elevatorOpenBtn').on('click', function () {
+            if (elevator.isOpen) {
+                startUsingElevator()
+                elevator.isOpen = false
+            } else {
+                $('#closedElevator').css('display', 'none');
+                $('#openedElevator').css('display', 'block');
+                $('#elevatorControl').css('z-index', 1);
+                elevator.isOpen = true;
+            }
+        })
+
+        $('.elevatorBtn').on('click', function (event) {
+            const elevatorBtn = $(event.currentTarget).data('btn');
+            // const elevatorBtn2 = $(event.currentTarget).attr('data-btn');
+            if (!isNaN(+elevatorBtn)) {
+                $('#personOutside').css('display', 'none');
+                $('#personInside').css('display', 'block');
+                setTimeout(() => {
+                    startUsingElevator();
+                    $('#personInside').css('display', 'none');
+                    elevator.toFloor(+elevatorBtn)
+                }, 1000);
+
+            }
+        })
+    </script>
+</body>
+
+</html>
